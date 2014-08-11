@@ -6,15 +6,42 @@ Reproducible Research: Peer Assessment 1
 
 Basic settings
 
-Set the working directory and set knitr and markdown options.
+Set the working directory
 
+```r
+setwd("~/GitHub/RepData_PeerAssessment1")
+```
 
-Load required libraries.
+Load required libraries and set knitr and markdown options.
 
 ```r
 require(dplyr)
+```
+
+```
+## Loading required package: dplyr
+## 
+## Attaching package: 'dplyr'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 require(knitr)
 require(rmarkdown)
+```
+
+```
+## Loading required package: rmarkdown
+```
+
+```r
 opts_chunk$set(fig.path="figures/")
 opts_chunk$set(echo = TRUE) # Always make code visible
 opts_chunk$set(results = "asis") # Always show results and graphs
@@ -52,7 +79,8 @@ dim(activitynoNA)
 ```
 
 [1] 15264     4
-## What is mean total number of steps taken per day?
+
+## What is the mean total number of steps taken per day?
 
 Create a dataset with the total number of steps taken per day.
 
@@ -62,7 +90,7 @@ steps_per_day <- activitynoNA %.% group_by(date) %.% summarise(total_steps = sum
 Make a histogram of the total number of steps taken each day.
 
 ```r
-with(steps_per_day, hist(total_steps, main = "Total steps per day", xlab = ""))
+with(steps_per_day, hist(total_steps, main = "Total steps per day (Null Values Excluded)", xlab = ""))
 ```
 
 ![plot of chunk hist_steps_per_day](figures/hist_steps_per_day.png) 
@@ -75,6 +103,7 @@ with(steps_per_day, summary(total_steps))
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
      41    8840   10800   10800   13300   21200 
+
 ## What is the average daily activity pattern?
 Create a dataset with the average number of steps taken per 5-minute interval,
 averaged across all days (y-axis)
@@ -93,7 +122,7 @@ intervals <- intervals[order(intervals$intervals), ]
 
 labels <- c("00:00", "05:00", "10:00", "15:00", "20:00")
 labels.at <- seq(0, 2000, 500)
-plot(intervals$intervals, intervals$interval.mean, type = "l", main = "Average steps 5-minute interval", 
+plot(intervals$intervals, intervals$interval.mean, type = "l", main = "Average steps per 5-minute interval", 
     ylab = "Average steps", xlab = "Time of day", xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 ```
@@ -112,8 +141,9 @@ Source: local data frame [1 x 2]
 
   interval average_activity
 1      835            206.2
+
 The 5-minute interval, on average across all the days in the dataset, with the
-maximum number of steps is 835.
+maximum number of steps is **835**.
 
 ## Imputing missing values
 There are a number of days/intervals where there are missing values (coded as NA).
@@ -165,7 +195,7 @@ Make a histogram of the total number of steps taken each day, using the original
 dataset including the imputed missing data.
 
 ```r
-with(steps_per_day_corrected, hist(total_steps, main = "Total steps per day", xlab = ""))
+with(steps_per_day_corrected, hist(total_steps, main = "Total steps per day (Null Values Replaced with Mean)", xlab = ""))
 ```
 
 ![plot of chunk hist_steps_per_day_corrected](figures/hist_steps_per_day_corrected.png) 
@@ -181,7 +211,7 @@ with(steps_per_day_corrected, summary(total_steps))
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
      41    9820   10800   10800   12800   21200 
 
-As there is no difference in the results, it does not matter whether the missing data is excluded or imputed.
+As there is **no difference** in the results, it does not matter whether the missing data is excluded or imputed.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -209,11 +239,11 @@ Plot two time series - weekdays and weekends - of the 5-minute intervals and ave
 ```r
 par <- par(mfrow = c(2, 1))
 plot(intervals.day.type$intervals, intervals.day.type$weekday.means, type = "l", 
-    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Average steps 5-minute interval at weekday", 
+    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Average steps per 5-minute interval at Weekday", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 plot(intervals.day.type$intervals, intervals.day.type$weekend.means, type = "l", 
-    col = "blue", ylab = "Average steps", xlab = "Time of day", main = "Average steps 5-minute interval at weekend", 
+    col = "blue", ylab = "Average steps", xlab = "Time of day", main = "Average steps per 5-minute interval at Weekend", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 ```
@@ -225,7 +255,7 @@ It is a bit difficult to compare the two plots. For a better comparison, combine
 
 ```r
 plot(intervals.day.type$intervals, intervals.day.type$weekday.means, type = "l", 
-    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparison between weekday and weekend", 
+    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparing Average Steps/5 Minutes between Weekday and Weekend", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 lines(intervals.day.type$intervals, intervals.day.type$weekend.means, type = "l", 

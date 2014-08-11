@@ -6,12 +6,12 @@ Reproducible Research: Peer Assessment 1
 
 Basic settings
 
-Set the working directory and set knitr and markdown options.
+Set the working directory
 ```{r }
-
+setwd("~/GitHub/RepData_PeerAssessment1")
 ```
 
-Load required libraries.
+Load required libraries and set knitr and markdown options.
 ```{r load_libraries,setoptions}
 require(dplyr)
 require(knitr)
@@ -50,7 +50,8 @@ activitynoNA <- na.omit(activity)
 rownames(activitynoNA) <- 1:nrow(activitynoNA)
 dim(activitynoNA)
 ```
-## What is mean total number of steps taken per day?
+
+## What is the mean total number of steps taken per day?
 
 Create a dataset with the total number of steps taken per day.
 ```{r steps_per_day}
@@ -65,6 +66,7 @@ Calculate and report the mean and median total number of steps taken per day.
 ```{r stepsmeanmedian}
 with(steps_per_day, summary(total_steps))
 ```
+
 ## What is the average daily activity pattern?
 Create a dataset with the average number of steps taken per 5-minute interval,
 averaged across all days (y-axis)
@@ -81,7 +83,7 @@ intervals <- intervals[order(intervals$intervals), ]
 
 labels <- c("00:00", "05:00", "10:00", "15:00", "20:00")
 labels.at <- seq(0, 2000, 500)
-plot(intervals$intervals, intervals$interval.mean, type = "l", main = "Average steps 5-minute interval", 
+plot(intervals$intervals, intervals$interval.mean, type = "l", main = "Average steps per 5-minute interval", 
     ylab = "Average steps", xlab = "Time of day", xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 ```
@@ -92,8 +94,9 @@ the maximum number of steps?
 interval_with_max_activity <- average_daily_activity %.% arrange(desc(average_activity)) %.% head(1)
 interval_with_max_activity
 ```
+
 The 5-minute interval, on average across all the days in the dataset, with the
-maximum number of steps is `r interval_with_max_activity$interval`.
+maximum number of steps is **`r interval_with_max_activity$interval`**.
 
 ## Imputing missing values
 There are a number of days/intervals where there are missing values (coded as NA).
@@ -142,7 +145,7 @@ Calculate and report the mean and median total number of steps taken per day, us
 with(steps_per_day_corrected, summary(total_steps))
 ```
 
-As there is no difference in the results, it does not matter whether the missing data is excluded or imputed.
+As there is **no difference** in the results, it does not matter whether the missing data is excluded or imputed.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 ```{r convert_to_weekday_weekend}
@@ -168,11 +171,11 @@ Plot two time series - weekdays and weekends - of the 5-minute intervals and ave
 ```{r plot_day_activity_separate, fig.height=8}
 par <- par(mfrow = c(2, 1))
 plot(intervals.day.type$intervals, intervals.day.type$weekday.means, type = "l", 
-    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Average steps 5-minute interval at weekday", 
+    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Average steps per 5-minute interval at Weekday", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 plot(intervals.day.type$intervals, intervals.day.type$weekend.means, type = "l", 
-    col = "blue", ylab = "Average steps", xlab = "Time of day", main = "Average steps 5-minute interval at weekend", 
+    col = "blue", ylab = "Average steps", xlab = "Time of day", main = "Average steps per 5-minute interval at Weekend", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 ```
@@ -181,7 +184,7 @@ It is a bit difficult to compare the two plots. For a better comparison, combine
 
 ```{r plot_activity_superimposed,fig.height=6}
 plot(intervals.day.type$intervals, intervals.day.type$weekday.means, type = "l", 
-    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparison between weekday and weekend", 
+    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparing Average Steps/5 Minutes between Weekday and Weekend", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 lines(intervals.day.type$intervals, intervals.day.type$weekend.means, type = "l", 
