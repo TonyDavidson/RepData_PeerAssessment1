@@ -16,32 +16,8 @@ Load required libraries and set knitr and markdown options.
 
 ```r
 require(dplyr)
-```
-
-```
-## Loading required package: dplyr
-## 
-## Attaching package: 'dplyr'
-## 
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 require(knitr)
 require(rmarkdown)
-```
-
-```
-## Loading required package: rmarkdown
-```
-
-```r
 opts_chunk$set(fig.path="figures/")
 opts_chunk$set(echo = TRUE) # Always make code visible
 opts_chunk$set(results = "asis") # Always show results and graphs
@@ -255,7 +231,7 @@ It is a bit difficult to compare the two plots. For a better comparison, combine
 
 ```r
 plot(intervals.day.type$intervals, intervals.day.type$weekday.means, type = "l", 
-    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparing Average Steps/5 Minutes between Weekday and Weekend", 
+    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparing Weekday and Weekend Average Steps/5 Minutes", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 lines(intervals.day.type$intervals, intervals.day.type$weekend.means, type = "l", 

@@ -5,22 +5,10 @@
 <p>Set the working directory</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;~/GitHub/RepData_PeerAssessment1&quot;</span>)</code></pre>
 <p>Load required libraries and set knitr and markdown options.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(dplyr)</code></pre>
-<pre><code>## Loading required package: dplyr
-## 
-## Attaching package: &#39;dplyr&#39;
-## 
-## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag
-## 
-## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(knitr)
-<span class="kw">require</span>(rmarkdown)</code></pre>
-<pre><code>## Loading required package: rmarkdown</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">opts_chunk$<span class="kw">set</span>(<span class="dt">fig.path=</span><span class="st">&quot;figures/&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(dplyr)
+<span class="kw">require</span>(knitr)
+<span class="kw">require</span>(rmarkdown)
+opts_chunk$<span class="kw">set</span>(<span class="dt">fig.path=</span><span class="st">&quot;figures/&quot;</span>)
 opts_chunk$<span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>) <span class="co"># Always make code visible</span>
 opts_chunk$<span class="kw">set</span>(<span class="dt">results =</span> <span class="st">&quot;asis&quot;</span>) <span class="co"># Always show results and graphs</span>
 <span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">1</span>) <span class="co"># Turn off scientific notations for numbers</span></code></pre>
@@ -140,7 +128,7 @@ intervals.day.type &lt;-<span class="st"> </span>intervals.day.type[<span class=
 </div>
 <p>It is a bit difficult to compare the two plots. For a better comparison, combine the time series on a single plot.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(intervals.day.type$intervals, intervals.day.type$weekday.means, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, 
-    <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Average steps&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Time of day&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Comparing Average Steps/5 Minutes between Weekday and Weekend&quot;</span>, 
+    <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Average steps&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Time of day&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Comparing Weekday and Weekend Average Steps/5 Minutes&quot;</span>, 
     <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>)
 <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> labels.at, <span class="dt">labels =</span> labels)
 <span class="kw">lines</span>(intervals.day.type$intervals, intervals.day.type$weekend.means, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, 

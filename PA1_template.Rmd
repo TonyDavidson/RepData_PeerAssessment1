@@ -184,7 +184,7 @@ It is a bit difficult to compare the two plots. For a better comparison, combine
 
 ```{r plot_activity_superimposed,fig.height=6}
 plot(intervals.day.type$intervals, intervals.day.type$weekday.means, type = "l", 
-    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparing Average Steps/5 Minutes between Weekday and Weekend", 
+    col = "red", ylab = "Average steps", xlab = "Time of day", main = "Comparing Weekday and Weekend Average Steps/5 Minutes", 
     xaxt = "n")
 axis(side = 1, at = labels.at, labels = labels)
 lines(intervals.day.type$intervals, intervals.day.type$weekend.means, type = "l", 
