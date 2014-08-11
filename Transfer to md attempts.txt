@@ -1,8 +1,0 @@
-
-
-setwd("~/GitHub/RepData_PeerAssessment1")
-library(knitr)
-library(pandoc)
-knit('PA1_template.Rmd')
-pandoc('PA1_template.md')
-
